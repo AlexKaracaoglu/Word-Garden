@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    // PROPERTIES
     @IBOutlet weak var userGuessLabel: UILabel!
     @IBOutlet weak var guessedLetterField: UITextField!
     @IBOutlet weak var guessLetterButton: UIButton!
@@ -42,6 +43,7 @@ class ViewController: UIViewController {
         wordsRemaining = wordsToGuess.count
     }
     
+    // FUNCTIONS
     func updateUiAfterGuess() {
         guessedLetterField.resignFirstResponder()
         guessedLetterField.text = ""
@@ -95,27 +97,28 @@ class ViewController: UIViewController {
         userGuessLabel.text = revealedWord
     }
     
+    // ACTIONS
     @IBAction func guessedLetterFieldChanged(_ sender: UITextField) {
-        if let letterGuessed = guessedLetterField.text?.last {
-            guessedLetterField.text = String(letterGuessed)
-            guessLetterButton.isEnabled = true
-        }
-        else {
-            guessLetterButton.isEnabled = false
-        }
-        
+                if let letterGuessed = guessedLetterField.text?.last {
+                    guessedLetterField.text = String(letterGuessed)
+                    guessLetterButton.isEnabled = true
+                }
+                else {
+                    guessLetterButton.isEnabled = false
+                }
+    }
+    
+    @IBAction func guessLetterButtonPressed(_ sender: UIButton) {
+        guess()
+        print("BUTTON PRESSED")
+        updateUiAfterGuess()
     }
     
     @IBAction func doneKeyPressed(_ sender: UITextField) {
         guess()
+        print("DONE KEY PRESSED")
         updateUiAfterGuess()
     }
-    
-    @IBAction func guessLetterButton(_ sender: UIButton) {
-        guess()
-        updateUiAfterGuess()
-    }
-    
     
     @IBAction func playAgainButtonPressed(_ sender: UIButton) {
         playAgainButton.isHidden = true
